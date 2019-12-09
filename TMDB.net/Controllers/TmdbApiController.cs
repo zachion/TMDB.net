@@ -49,7 +49,8 @@ namespace TMDB.net.Controllers
             /*Calling API https://developers.themoviedb.org/3/search/search-people */
             //string apiKey = "3356865d41894a2fa9bfa84b2b5f59bb";
             string apiKey = "28f726d76e551a93fd511f2360befa56";
-            HttpWebRequest apiRequest = WebRequest.Create("https://api.themoviedb.org/3/search/person?api_key=" + apiKey + "&language=en-US&query=" + searchText + "&page=" + pageNo + "&include_adult=false") as HttpWebRequest;
+            HttpWebRequest apiRequest = WebRequest.Create("https://api.themoviedb.org/3/search/person?api_key=" + apiKey +
+                "&language=en-US&query=" + searchText + "&page=" + pageNo + "&include_adult=false") as HttpWebRequest;
 
             string apiResponse = "";
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3
@@ -70,10 +71,12 @@ namespace TMDB.net.Controllers
             sb.Append("<div class=\"resultDiv\"><p>Names</p>");
             foreach (Result result in rootObject.results)
             {
-                string image = result.profilePath == null ? Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + result.profilePath;
+                string image = result.profile_path == null ?
+                    Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + result.profile_path;
                 string link = Url.Action("GetPerson", "TmdbApi", new { id = result.id });
 
-                sb.Append("<div class=\"result\" resourceId=\"" + result.id + "\">" + "<a href=\"" + link + "\"><img src=\"" + image + "\" />" + "<p>" + result.name + "</a></p></div>");
+                sb.Append("<div class=\"result\" resourceId=\"" + result.id + "\">" + "<a href=\"" + link +
+                    "\"><img src=\"" + image + "\" />" + "<p>" + result.name + "</a></p></div>");
             }
 
             ViewBag.Result = sb.ToString();
@@ -81,7 +84,7 @@ namespace TMDB.net.Controllers
             int pageSize = 20;
             PagingInfo pagingInfo = new PagingInfo();
             pagingInfo.currentPage = pageNo;
-            pagingInfo.totalItems = rootObject.totalResults;
+            pagingInfo.totalItems = rootObject.total_results;
             pagingInfo.itemsPerPage = pageSize;
             ViewBag.Paging = pagingInfo;
         }
@@ -91,8 +94,9 @@ namespace TMDB.net.Controllers
         public ActionResult GetPerson(int id)
         {
             /*Calling API https://developers.themoviedb.org/3/people */
-            string apiKey = "3356865d41894a2fa9bfa84b2b5f59bb";
-            HttpWebRequest apiRequest = WebRequest.Create("https://api.themoviedb.org/3/person/" + id + "?api_key=" + apiKey + "&language=en-US") as HttpWebRequest;
+            string apiKey = "28f726d76e551a93fd511f2360befa56";
+            HttpWebRequest apiRequest = WebRequest.Create("https://api.themoviedb.org/3/person/" + id +
+                "?api_key=" + apiKey + "&language=en-US") as HttpWebRequest;
 
             string apiResponse = "";
             using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
@@ -109,8 +113,9 @@ namespace TMDB.net.Controllers
             theMovieDb.biography = rootObject.biography;
             theMovieDb.birthday = rootObject.birthday;
             theMovieDb.placeOfBirth = rootObject.placeOfBirth;
-            theMovieDb.profilePath = rootObject.profilePath == null ? Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + rootObject.profilePath;
-            theMovieDb.alsoKnownAs = string.Join(", ", rootObject.alsoKnownAs);
+            theMovieDb.profilePath = rootObject.profilePath == null ?
+                Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + rootObject.profilePath;
+            //theMovieDb.alsoKnownAs = string.Join(", ", rootObject.alsoKnownAs);
 
             return View(theMovieDb);
         }
