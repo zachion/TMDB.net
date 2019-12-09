@@ -86,6 +86,33 @@ namespace TMDB.net.Controllers
             ViewBag.Paging = pagingInfo;
         }
 
-      
+        //This method calls the TheMovieDb API once more, and this time it passes the actors id to it.
+        //The API sends back the JSON containing the complete information of the given actors.
+        public ActionResult GetPerson(int id)
+        {
+            /*Calling API https://developers.themoviedb.org/3/people */
+            string apiKey = "3356865d41894a2fa9bfa84b2b5f59bb";
+            HttpWebRequest apiRequest = WebRequest.Create("https://api.themoviedb.org/3/person/" + id + "?api_key=" + apiKey + "&language=en-US") as HttpWebRequest;
+
+            string apiResponse = "";
+            using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
+            {
+                StreamReader reader = new StreamReader(response.GetResponseStream());
+                apiResponse = reader.ReadToEnd();
+            }
+            /*End*/
+
+            /*http://json2csharp.com*/
+            ResponsePerson rootObject = JsonConvert.DeserializeObject<ResponsePerson>(apiResponse);
+            TheMovieDb theMovieDb = new TheMovieDb();
+            theMovieDb.name = rootObject.name;
+            theMovieDb.biography = rootObject.biography;
+            theMovieDb.birthday = rootObject.birthday;
+            theMovieDb.placeOfBirth = rootObject.placeOfBirth;
+            theMovieDb.profilePath = rootObject.profilePath == null ? Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + rootObject.profilePath;
+            theMovieDb.alsoKnownAs = string.Join(", ", rootObject.alsoKnownAs);
+
+            return View(theMovieDb);
+        }
     }
 }
