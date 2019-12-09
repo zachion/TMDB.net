@@ -5,6 +5,8 @@ using System.Web;
 
 namespace TMDB.net.Class
 {
+    //I get the result in JSON format which is serialized into the ResponseSearchPeople class. 
+    //For doing this Serialization I use the JsonConvert class from namespace Newtonsoft.Json.
     public class ResponseSearchPeople
     {
         public int page { get; set; }
