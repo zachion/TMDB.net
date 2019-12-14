@@ -14,6 +14,16 @@ namespace TMDB.net
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+            routes.MapRoute(
+                name: "Popular",
+                url: "Popular/{page}/",
+                defaults: new { controller = "Popular", action = "Index", page = "" },
+                constraints: new { page = @"^[0-9]+$" }
+            );
+
+
+
             routes.MapRoute(
                 name: "Person",
                 url: "Person/{id}/",

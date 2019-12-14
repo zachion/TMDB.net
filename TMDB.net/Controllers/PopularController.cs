@@ -1,30 +1,34 @@
-﻿using System.Net;
-using System.IO;
-using Newtonsoft.Json;
-using TMDB.net.Class;
-using System.Text;
-using System.Web.Mvc;
+﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Web;
+using System.Web.Mvc;
+using TMDB.net.Class;
 using TMDB.net.Models;
-using Result = TMDB.net.Class.Result;
 
 namespace TMDB.net.Controllers
 {
-    public class PersonController : Controller
+
+    public class PopularController : Controller
     {
+        // GET: Popular
+
         //we are using this method for doing the actor search (by their names) through this API.
         //The parameter called peopleName contains the value of the text box(that contains actor’s name), 
         //the parameter called page contains the current page number as given in the URL.
         //Consider – If the URL is ‘http://localhost:64253/TmdbApi/nicole/1’ then ‘peopleName’ will receive value of ‘nicole’ 
         //while ‘page’ will receive the value of ‘1’.
         // GET
-        public ActionResult Index(string peopleName, int? page)
+        public ActionResult Index(int? page)
         {
             if (page != null)
-                CallAPI(peopleName, Convert.ToInt32(page));
+                CallAPI(Convert.ToInt32(page));
 
             Models.TheMovieDb theMovieDb = new Models.TheMovieDb();
-            theMovieDb.searchText = peopleName;
             return View(theMovieDb);
         }
 
@@ -33,7 +37,7 @@ namespace TMDB.net.Controllers
         {
             if (ModelState.IsValid)
             {
-                CallAPI(searchText, 0);
+                CallAPI(1);
             }
             return View(theMovieDb);
         }
@@ -43,15 +47,15 @@ namespace TMDB.net.Controllers
         //I have passed the ‘name’ of the actor and the ‘page number’ to this method.
         //It makes the call to the CallAPI() method.I pass the actor name and ‘0’ for the page number, 
         //telling it to get me the 1st page for the search result.
-        public void CallAPI(string searchText, int page)
+        public void CallAPI(int page)
         {
             int pageNo = Convert.ToInt32(page) == 0 ? 1 : Convert.ToInt32(page);
 
-            /*Calling API https://developers.themoviedb.org/3/search/search-people */
+            /*Calling API https://developers.themoviedb.org/3/movie/popular */
             //string apiKey = "3356865d41894a2fa9bfa84b2b5f59bb";
             string apiKey = "28f726d76e551a93fd511f2360befa56";
-            HttpWebRequest apiRequest = WebRequest.Create("https://api.themoviedb.org/3/search/person?api_key=" + apiKey +
-                "&language=en-US&query=" + searchText + "&page=" + pageNo + "&include_adult=false") as HttpWebRequest;
+            HttpWebRequest apiRequest = WebRequest.Create("https://api.themoviedb.org/3/movie/popular?api_key=" + apiKey +
+                "&language=en-US&page=" + pageNo + "&include_adult=false") as HttpWebRequest;
 
             string apiResponse = "";
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3
@@ -66,18 +70,18 @@ namespace TMDB.net.Controllers
             /*End*/
 
             /*http://json2csharp.com*/
-            ResponseSearchPeople rootObject = JsonConvert.DeserializeObject<ResponseSearchPeople>(apiResponse);
+            ResponseSearchPopular rootObject = JsonConvert.DeserializeObject<ResponseSearchPopular>(apiResponse);
 
             StringBuilder sb = new StringBuilder();
             sb.Append("<div class=\"resultDiv\"><p>Names</p>");
-            foreach (Result result in rootObject.results)
+            foreach (ResultPopular result in rootObject.results)
             {
-                string image = result.profile_path == null ?
-                    Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + result.profile_path;
+                string image = result.poster_path == null ?
+                    Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + result.poster_path;
                 string link = Url.Action("GetPerson", "TmdbApi", new { id = result.id });
 
                 sb.Append("<div class=\"result\" resourceId=\"" + result.id + "\">" + "<a href=\"" + link +
-                    "\"><img src=\"" + image + "\" />" + "<p>" + result.name + "</a></p></div>");
+                    "\"><img src=\"" + image + "\" />" + "<p>" + result.title + "</a></p></div>");
             }
 
             ViewBag.Result = sb.ToString();
