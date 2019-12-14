@@ -15,6 +15,13 @@ namespace TMDB.net
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Person",
+                url: "Person/{id}/",
+                defaults: new { controller = "Person", action = "GetPerson", id = "" },
+                constraints: new { id = @"^[0-9]+$" }
+            );
+
+            routes.MapRoute(
                  name: "TmdbApi",
                  url: "TmdbApi/{id}/",
                  defaults: new { controller = "TmdbApi", action = "GetPerson", id = "" },
