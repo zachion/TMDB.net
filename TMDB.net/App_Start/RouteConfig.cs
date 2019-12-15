@@ -14,6 +14,11 @@ namespace TMDB.net
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(
+            name: "Default",
+            url: "{controller}/{action}/{id}",
+            defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, page = 1 }
+        );
 
             routes.MapRoute(
                 name: "Popular",
@@ -21,8 +26,6 @@ namespace TMDB.net
                 defaults: new { controller = "Popular", action = "Index", page = "" },
                 constraints: new { page = @"^[0-9]+$" }
             );
-
-
 
             routes.MapRoute(
                 name: "Person",
@@ -45,11 +48,6 @@ namespace TMDB.net
                 constraints: new { peopleName = @"^[a-zA-Z]+$", page = @"^[0-9]+$" }
             );
 
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "TmdbApi", action = "Index", id = UrlParameter.Optional }
-            );
         }
 
     }

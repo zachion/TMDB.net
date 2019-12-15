@@ -180,6 +180,8 @@
     <Content Include="Views\Person\Index.cshtml" />
     <Content Include="Views\Popular\GetPerson.cshtml" />
     <Content Include="Views\Popular\Index.cshtml" />
+    <Content Include="Views\Home\GetPerson.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
