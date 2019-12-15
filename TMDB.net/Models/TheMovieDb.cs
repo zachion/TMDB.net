@@ -23,5 +23,7 @@ namespace TMDB.net.Models
         public string placeOfBirth { get; set; }
         public double popularity { get; set; }
         public string profilePath { get; set; }
+        public NewMoviePageResponse newMoviePage { get; set; }
+
     }
 }

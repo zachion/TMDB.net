@@ -1,26 +1,49 @@
-﻿@model TMDB.net.Models.TheMovieDb
+﻿@model TMDB.net.Models.NewMoviePageResponse
 @using TMDB.net.Class;
 
-@{ ViewBag.Title = "Implementing TheMovieDB (TMDB) API";}
+@{ 
+    ViewBag.Title = "Implementing TheMovieDB (TMDB) API";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+ }
 <h1>Implementing The Movie Database API</h1>
 <div id="apiDiv">
     <h4>Enter the Search Text and Press Submit Button</h4>
-    @using (Html.BeginForm())
-    {
-        @Html.EditorFor(model => model.searchText)
-        <button id="submit">Submit</button>
-        @Html.ValidationMessageFor(model => model.searchText)
-    }
+    @*@using (Html.BeginForm())
+        {
+            @Html.EditorFor(model => model.results.searchText)
+            <button id="submit">Submit</button>
+            @Html.ValidationMessageFor(model => model.searchText)
+        }*@
     <div id="message">
-        @(new HtmlString(ViewBag.Result))
-    </div>
-    <div class="pagingDiv">
-        @{
-            PagingInfo pagingInfo = (PagingInfo)ViewBag.Paging;
-            if (pagingInfo != null)
+        <div class="resultDiv">
+            <p>Names</p>
+            @if (Model != null)
             {
-                @Html.PageLinks((PagingInfo)ViewBag.Paging, x => Url.Action("Index", "TmdbApi", new { peopleName = Model.searchText, page = x }))
+                foreach (var movie in Model.results)
+                {
+                    string image = movie.poster_path == null ?
+                    Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + movie.poster_path;
+                    string link = Url.Action("GetPerson", "TmdbApi", new { id = movie.id });
+
+
+                    <div class="result" resourceId="@movie.id">
+                        <a href="@link">
+                            <img src=@image />
+                            <p>@movie.title</p>
+                        </a>
+                    </div>
+                }
             }
-        }
+            @(new HtmlString(ViewBag.Result))
+        </div>
+        <div class="pagingDiv">
+            @{
+                PagingInfo pagingInfo = (PagingInfo)ViewBag.Paging;
+                if (pagingInfo != null)
+                {
+                    @Html.PageLinks((PagingInfo)ViewBag.Paging, x => Url.Action("Index", "TmdbApi", new { page = x }))
+                }
+            }
+        </div>
     </div>
 </div>

@@ -88,7 +88,7 @@ body {
     }
 
         #apiDiv #message .resultDiv {
-            background: #FFF;
+            background: #000;
             display: inline-block;
         }
 
@@ -101,7 +101,7 @@ body {
             }
 
             #apiDiv #message .resultDiv .result {
-                width: 23%;
+                width: 16%;
                 height: 240px;
                 padding: 6px;
                 float: left;
