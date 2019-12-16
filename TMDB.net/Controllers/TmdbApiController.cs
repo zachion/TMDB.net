@@ -14,7 +14,7 @@ namespace TMDB.net.Controllers
         //we are using this method for doing the actor search (by their names) through this API.
         //The parameter called peopleName contains the value of the text box(that contains actor’s name), 
         //the parameter called page contains the current page number as given in the URL.
-        //Consider – If the URL is ‘http://localhost:64253/TmdbApi/nicole/1’ then ‘peopleName’ will receive value of ‘nicole’ 
+        //Consider – If the URL is ‘http://localhost:64253/TmdbApi/travolta/1’ then ‘peopleName’ will receive value of ‘Travolta’ 
         //while ‘page’ will receive the value of ‘1’.
         // GET
         public ActionResult Index(string peopleName, int? page)

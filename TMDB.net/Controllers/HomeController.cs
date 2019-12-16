@@ -16,13 +16,6 @@ namespace TMDB.net.Controllers
     public class HomeController : Controller
     {
         // GET: Popular
-
-        //we are using this method for doing the actor search (by their names) through this API.
-        //The parameter called peopleName contains the value of the text box(that contains actor’s name), 
-        //the parameter called page contains the current page number as given in the URL.
-        //Consider – If the URL is ‘http://localhost:64253/TmdbApi/nicole/1’ then ‘peopleName’ will receive value of ‘nicole’ 
-        //while ‘page’ will receive the value of ‘1’.
-        // GET
         public ActionResult Index(int? page)
         {
             var popularMoviesResponse = new PopularMoviesResponse();
@@ -55,9 +48,8 @@ namespace TMDB.net.Controllers
         }
 
         //This method calls CallAPI() which will make the actual API call.
-        //I have passed the ‘name’ of the actor and the ‘page number’ to this method.
-        //It makes the call to the CallAPI() method.I pass the actor name and ‘0’ for the page number, 
-        //telling it to get me the 1st page for the search result.
+        //It makes the call to the CallAPI() for getting pupular movies together with page number
+        //telling it to get me the x page for the search result.
         public PopularMoviesResponse GetPupular(int page)
         {
 

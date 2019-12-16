@@ -13,8 +13,8 @@ namespace TMDB.net.Controllers
     public class MovieDetailsController : Controller
     {
         // GET: Movie
-        //This method calls the TheMovieDb API once more, and this time it passes the actors id to it.
-        //The API sends back the JSON containing the complete information of the given actors.
+        //This method calls the TheMovieDb API once more, and this time it passes the movie id to it.
+        //The API sends back the JSON containing the complete information of the given movie.
 
         public ActionResult Index(int id)
         {
