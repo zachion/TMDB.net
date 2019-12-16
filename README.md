@@ -1,5 +1,5 @@
 ﻿# TMDB.net
-I have developed a a TMDP wrapper manager using Asp.NET MVC 5 
+I have developed a a TMDB wrapper manager using Asp.NET MVC 5 
 This is a web application with a two main view areas (2 pages) for viewing popular movies and
 movie specific information. 
 
