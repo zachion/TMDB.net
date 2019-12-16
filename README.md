@@ -18,4 +18,6 @@ All information is provided from the TMDB: https://www.themoviedb.org/
 
 To get the source code and run this project please clone: https://github.com/zachion/TMDB.net
 
+![](TMDB-net-demo.gif)
+
 Developed by @Zach Ioannou - 2019
