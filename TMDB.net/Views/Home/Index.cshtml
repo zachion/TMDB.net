@@ -14,36 +14,37 @@
                 string image = movie.poster_path == null ?
                 Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + movie.poster_path;
                 string link = Url.Action("Index", "MovieDetails", new { id = movie.id });
-                <div class="movie-card">
-                    <div class="movie-header" style="background: url(@image);background-size: cover;">
-                    </div><!--movie-header-->
-                    <div class="movie-content">
-                        <div class="movie-content-header">
-                            <a href="@link">
-                                <h3 class="movie-title">@movie.title</h3>
-                            </a>
-                            <div class="imax-logo"></div>
-                        </div>
-                        <div class="movie-info">
-                            <div class="info-section">
-                                <label>Date & Time</label>
-                                <span>@movie.release_date</span>
-                            </div><!--date,time-->
-                            <div class="info-section">
-                                <label>Popularity</label>
-                                <span>@movie.popularity</span>
-                            </div><!--screen-->
-                            <div class="info-section">
-                                <label>Language</label>
-                                <span>@movie.original_language</span>
-                            </div><!--row-->
-                            <div class="info-section">
-                                <label>Votes</label>
-                                <span>@movie.vote_count</span>
-                            </div><!--seat-->
-                        </div>
-                    </div><!--movie-content-->
-                </div><!--movie-card-->
+        <div class="movie-card">
+                <a href="@link">
+                    <div class="movie-header" style="background: url(@image);background-size: cover;">    </div><!--movie-header-->
+                </a>
+                <div class="movie-content">
+                    <div class="movie-content-header">
+                        <a href="@link">
+                            <h3 class="movie-title">@movie.title</h3>
+                        </a>
+                        <div class="imax-logo"></div>
+                    </div>
+                    <div class="movie-info">
+                        <div class="info-section">
+                            <label>Date & Time</label>
+                            <span>@movie.release_date</span>
+                        </div><!--date,time-->
+                        <div class="info-section">
+                            <label>Popularity</label>
+                            <span>@movie.popularity</span>
+                        </div><!--screen-->
+                        <div class="info-section">
+                            <label>Language</label>
+                            <span>@movie.original_language</span>
+                        </div><!--row-->
+                        <div class="info-section">
+                            <label>Votes</label>
+                            <span>@movie.vote_count</span>
+                        </div><!--seat-->
+                    </div>
+                </div><!--movie-content-->
+        </div><!--movie-card-->
             }
         }
 
