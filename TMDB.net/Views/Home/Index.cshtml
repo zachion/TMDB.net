@@ -1,49 +1,64 @@
-﻿@model TMDB.net.Models.NewMoviePageResponse
+﻿@model TMDB.net.Models.PopularMoviesResponse
 @using TMDB.net.Class;
 
 @{ 
     ViewBag.Title = "Implementing TheMovieDB (TMDB) API";
     Layout = "~/Views/Shared/_Layout.cshtml";
  }
-<h1>Implementing The Movie Database API</h1>
 <div id="apiDiv">
-    <h4>Enter the Search Text and Press Submit Button</h4>
-    @*@using (Html.BeginForm())
+    <div class="container">
+        @if (Model != null)
         {
-            @Html.EditorFor(model => model.results.searchText)
-            <button id="submit">Submit</button>
-            @Html.ValidationMessageFor(model => model.searchText)
-        }*@
-    <div id="message">
-        <div class="resultDiv">
-            <p>Names</p>
-            @if (Model != null)
+            foreach (var movie in Model.results)
             {
-                foreach (var movie in Model.results)
-                {
-                    string image = movie.poster_path == null ?
-                    Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + movie.poster_path;
-                    string link = Url.Action("GetPerson", "TmdbApi", new { id = movie.id });
-
-
-                    <div class="result" resourceId="@movie.id">
-                        <a href="@link">
-                            <img src=@image />
-                            <p>@movie.title</p>
-                        </a>
-                    </div>
-                }
+                string image = movie.poster_path == null ?
+                Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + movie.poster_path;
+                string link = Url.Action("Index", "MovieDetails", new { id = movie.id });
+                <div class="movie-card">
+                    <div class="movie-header" style="background: url(@image);background-size: cover;">
+                    </div><!--movie-header-->
+                    <div class="movie-content">
+                        <div class="movie-content-header">
+                            <a href="@link">
+                                <h3 class="movie-title">@movie.title</h3>
+                            </a>
+                            <div class="imax-logo"></div>
+                        </div>
+                        <div class="movie-info">
+                            <div class="info-section">
+                                <label>Date & Time</label>
+                                <span>@movie.release_date</span>
+                            </div><!--date,time-->
+                            <div class="info-section">
+                                <label>Popularity</label>
+                                <span>@movie.popularity</span>
+                            </div><!--screen-->
+                            <div class="info-section">
+                                <label>Language</label>
+                                <span>@movie.original_language</span>
+                            </div><!--row-->
+                            <div class="info-section">
+                                <label>Votes</label>
+                                <span>@movie.vote_count</span>
+                            </div><!--seat-->
+                        </div>
+                    </div><!--movie-content-->
+                </div><!--movie-card-->
             }
-            @(new HtmlString(ViewBag.Result))
-        </div>
-        <div class="pagingDiv">
-            @{
-                PagingInfo pagingInfo = (PagingInfo)ViewBag.Paging;
-                if (pagingInfo != null)
-                {
-                    @Html.PageLinks((PagingInfo)ViewBag.Paging, x => Url.Action("Index", "TmdbApi", new { page = x }))
-                }
+        }
+
+    </div><!--container-->
+    <div id="message">
+        @(new HtmlString(ViewBag.Result))
+    </div>
+    <div class="pagingDiv">
+        @{
+            PagingInfo pagingInfo = (PagingInfo)ViewBag.Paging;
+            if (pagingInfo != null)
+            {
+                @Html.PageLinks((PagingInfo)ViewBag.Paging, x => Url.Action("Index", "Home", new { page = x }))
             }
-        </div>
+        }
     </div>
 </div>
+

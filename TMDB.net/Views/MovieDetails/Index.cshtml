@@ -1,0 +1,95 @@
+﻿@model TMDB.net.Models.MovieInformation
+@using TMDB.net.Class;
+
+@{ 
+    ViewBag.Title = "Implementing TheMovieDB (TMDB) API";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+ }
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div id="apiDiv">
+    <div class="movie-ticket">
+        <div class="container-fluid">
+            <!-- Item -->
+            <div class="ui-item">
+                <!-- Head -->
+                <div class="ui-head">
+
+                    @if (Model != null)
+                    {
+                        string image = Model.backdrop_path == null ?
+                        Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + Model.backdrop_path;
+                        <!-- Background Image -->
+                        <img src="@image" alt="" class="img-responsive bg-img">
+                        <!-- Transparent Background -->
+                        <div class="ui-trans clearfix">
+                            <!-- Image -->
+                            <img src="@image" alt="" class="img-responsive">
+                            <!-- Details -->
+                            <div class="ui-details clearfix">
+                                <!-- Movie Name -->
+                                <h2><a href="#">@Model.original_title</a></h2>
+                                <!-- Labels -->
+                                <a href="#" class="label">@Model.release_date.ToString()</a>
+                                <a href="#" class="label">@Model.vote_average (@Model.popularity)</a>
+                                <a href="#" class="label">@Model.runtime m</a>
+                                <br />
+                                @{
+                                    foreach (var genre in Model.genres)
+                                    {
+                                        <a href="#" class="label">@genre.name</a>
+                                    }
+                                }
+                                <br />
+                                @{
+                                    foreach (var language in Model.spoken_languages)
+                                    {
+                                        <a href="#" class="label">@language.name</a>
+                                    }
+                                }
+                                @{
+                                    foreach (var country in Model.production_countries)
+                                    {
+                                        <a href="#" class="label">@country.name</a>
+                                    }
+                                }
+                                <!-- Heading -->
+                                <br />
+                                <h4><span>Status</span>:</h4>
+                                <h4>@Model.status</h4>
+                                <!-- Writers -->
+                                <h5><a href="#"></a></h5>
+                                <br />
+                            </div>
+                        </div>
+                    }
+                </div>
+                    <!-- Review -->
+                <div class="ui-review">
+                    <!-- Heading -->
+                    <h3>@Model.title</h3>
+                    <!-- Paragraph -->
+                    <p>@Model.overview</p>
+                    <!-- company-->
+                    @{
+                        foreach (var company in Model.production_companies)
+                        {
+                            if (company.logo_path != null)
+                            {
+                                <img src="https://image.tmdb.org/t/p/w500/@company.logo_path" style="width:125px;" />
+                            }
+                        }
+                    }
+                    <!-- Buttons -->
+                    <br /><br />
+                          <div class=" text-center">
+                              <button type="button" class="btn btn-light" onclick="window.history.back();">Back</button>
+                              &nbsp;
+                              <a href="#" class="ui-btn bg-red"><i class="fa fa-ticket"></i> Buy Tickets</a>
+                              <a href="#" class="ui-btn bg-green"><i class="fa fa-dot-circle-o"></i> Buy DVDs</a>
+                          </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        @(new HtmlString(ViewBag.Result))
+</div>

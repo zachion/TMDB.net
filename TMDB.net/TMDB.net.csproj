@@ -127,14 +127,14 @@
     <Compile Include="Class\ResponseSearchPeople.cs" />
     <Compile Include="Class\Result.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MovieDetailsController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
-    <Compile Include="Controllers\PopularController.cs" />
     <Compile Include="Controllers\TmdbApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\NewMoviePage.cs" />
-    <Compile Include="Models\Popular.cs" />
+    <Compile Include="Models\MovieInformation.cs" />
+    <Compile Include="Models\PopularMoviesResponse.cs" />
     <Compile Include="Models\TheMovieDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -179,10 +179,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Person\GetPerson.cshtml" />
     <Content Include="Views\Person\Index.cshtml" />
-    <Content Include="Views\Popular\GetPerson.cshtml" />
-    <Content Include="Views\Popular\Index.cshtml" />
     <Content Include="Views\Home\GetPerson.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\MovieDetails\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,7 +6,14 @@ using System.Web;
 
 namespace TMDB.net.Models
 {
-    public class ResultPopular
+    public class PopularMoviesResponse
+    {
+        public int page { get; set; }
+        public int total_results { get; set; }
+        public int total_pages { get; set; }
+        public List<Movie> results { get; set; }
+    }
+    public class Movie
     {
         public double popularity { get; set; }
         public int vote_count { get; set; }
@@ -24,11 +31,5 @@ namespace TMDB.net.Models
         public string release_date { get; set; }
     }
 
-    public class ResponseSearchPopular
-    {
-        public int page { get; set; }
-        public int total_results { get; set; }
-        public int total_pages { get; set; }
-        public List<ResultPopular> results { get; set; }
-    }
+
 }
