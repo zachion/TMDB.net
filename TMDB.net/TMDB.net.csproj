@@ -120,12 +120,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Class\KnownFor.cs" />
     <Compile Include="Class\PagingHelper.cs" />
     <Compile Include="Class\PagingInfo.cs" />
-    <Compile Include="Class\ResponsePerson.cs" />
-    <Compile Include="Class\ResponseSearchPeople.cs" />
-    <Compile Include="Class\Result.cs" />
+    <Compile Include="Models\SearchPerson.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MovieDetailsController.cs" />
     <Compile Include="Global.asax.cs">
