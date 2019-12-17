@@ -70,24 +70,26 @@
                     <!-- Paragraph -->
                     <p>@Model.overview</p>
                     <!-- company-->
-                    @{
-                        foreach (var company in Model.production_companies)
-                        {
-                            if (company.logo_path != null)
+                    <div class=" text-center">
+                        @{
+                            foreach (var company in Model.production_companies)
                             {
-                                <img src="https://image.tmdb.org/t/p/w500/@company.logo_path" style="width:125px;" />
+                                if (company.logo_path != null)
+                                {
+                                    <img src="https://image.tmdb.org/t/p/w500/@company.logo_path" style="width:125px;" />
+                                }
                             }
                         }
-                    }
-                    <!-- Buttons -->
-                    <br /><br />
-                          <div class=" text-center">
-                              <button type="button" class="btn btn-light" onclick="window.history.back();">Back</button>
-                              &nbsp;
-                              <a href="#" class="ui-btn bg-red"><i class="fa fa-ticket"></i> Buy Tickets</a>
-                              <a href="#" class="ui-btn bg-green"><i class="fa fa-dot-circle-o"></i> Buy DVDs</a>
-                          </div>
-                </div>
+                        </div>
+                        <!-- Buttons -->
+                        <br /><br />
+                        <div class=" text-center">
+                            <button type="button" class="btn btn-light" onclick="window.history.back();">Back</button>
+                            &nbsp;
+                            <a href="#" class="ui-btn bg-red"><i class="fa fa-ticket"></i> Buy Tickets</a>
+                            <a href="#" class="ui-btn bg-green"><i class="fa fa-dot-circle-o"></i> Buy DVDs</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
