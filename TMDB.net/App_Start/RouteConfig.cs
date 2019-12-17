@@ -20,14 +20,7 @@ namespace TMDB.net
             defaults: new { controller = "Home", action = "Index" }
         );
 
-            routes.MapRoute(
-                name: "Popular",
-                url: "Popular/{page}/",
-                defaults: new { controller = "Popular", action = "Index", page = "" },
-                constraints: new { page = @"^[0-9]+$" }
-            );
-
-
+         
             routes.MapRoute(
                 name: "Paging",
                 url: "{controller}/{action}/{page}",
