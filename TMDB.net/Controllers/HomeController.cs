@@ -16,17 +16,12 @@ namespace TMDB.net.Controllers
     public class HomeController : Controller
     {
         // GET: Popular
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? id)
         {
-            var popularMoviesResponse = new PopularMoviesResponse();
+            int pageNo = Convert.ToInt32(id) == 0 ? 1 : Convert.ToInt32(id);
 
-            if (page != null)
-                popularMoviesResponse = GetPupular(Convert.ToInt32(page));
+            var popularMoviesResponse = GetPupular(Convert.ToInt32(pageNo));
 
-            //Models.NewMoviePageResponse theMovieDb = new Models.NewMoviePageResponse();
-
-
-            int pageNo = Convert.ToInt32(page) == 0 ? 1 : Convert.ToInt32(page);
             int pageSize = 20;
             PagingInfo pagingInfo = new PagingInfo();
             pagingInfo.currentPage = pageNo;
@@ -55,7 +50,6 @@ namespace TMDB.net.Controllers
 
 
             /*Calling API https://developers.themoviedb.org/3/movie/popular */
-            //string apiKey = "3356865d41894a2fa9bfa84b2b5f59bb";
             string apiKey = "28f726d76e551a93fd511f2360befa56";
             HttpWebRequest apiRequest = WebRequest.Create("https://api.themoviedb.org/3/movie/popular?api_key=" + apiKey +
                 "&language=en-US&page=" + page + "&include_adult=false") as HttpWebRequest;

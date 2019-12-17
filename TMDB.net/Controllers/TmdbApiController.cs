@@ -47,7 +47,6 @@ namespace TMDB.net.Controllers
             int pageNo = Convert.ToInt32(page) == 0 ? 1 : Convert.ToInt32(page);
 
             /*Calling API https://developers.themoviedb.org/3/search/search-people */
-            //string apiKey = "3356865d41894a2fa9bfa84b2b5f59bb";
             string apiKey = "28f726d76e551a93fd511f2360befa56";
             HttpWebRequest apiRequest = WebRequest.Create("https://api.themoviedb.org/3/search/person?api_key=" + apiKey +
                 "&language=en-US&query=" + searchText + "&page=" + pageNo + "&include_adult=false") as HttpWebRequest;

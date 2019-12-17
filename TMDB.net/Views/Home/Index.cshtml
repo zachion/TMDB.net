@@ -57,9 +57,8 @@
             PagingInfo pagingInfo = (PagingInfo)ViewBag.Paging;
             if (pagingInfo != null)
             {
-                @Html.PageLinks((PagingInfo)ViewBag.Paging, x => Url.Action("Index", "Home", new { page = x }))
+                @Html.PageLinks((PagingInfo)ViewBag.Paging, x => Url.Action("Index", "Home", new { id = (int)x }))
             }
         }
     </div>
 </div>
-

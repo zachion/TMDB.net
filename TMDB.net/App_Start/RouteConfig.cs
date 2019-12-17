@@ -43,9 +43,9 @@ namespace TMDB.net
 
             routes.MapRoute(
                 name: "TmdbApiPaging",
-                url: "TmdbApi/{peopleName}/{page}",
-                defaults: new { controller = "TmdbApi", action = "Index", peopleName = "", page = "" },
-                constraints: new { peopleName = @"^[a-zA-Z]+$", page = @"^[0-9]+$" }
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                constraints: new { page = @"^[0-9]+$" }
             );
 
         }
