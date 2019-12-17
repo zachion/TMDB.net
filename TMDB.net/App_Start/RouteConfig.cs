@@ -16,8 +16,8 @@ namespace TMDB.net
 
             routes.MapRoute(
             name: "Default",
-            url: "{controller}/{action}/{id}",
-            defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, page = 1 }
+            url: "{controller}/{action}",
+            defaults: new { controller = "Home", action = "Index" }
         );
 
             routes.MapRoute(
@@ -27,24 +27,11 @@ namespace TMDB.net
                 constraints: new { page = @"^[0-9]+$" }
             );
 
-            routes.MapRoute(
-                name: "Person",
-                url: "Person/{id}/",
-                defaults: new { controller = "Person", action = "GetPerson", id = "" },
-                constraints: new { id = @"^[0-9]+$" }
-            );
 
             routes.MapRoute(
-                 name: "TmdbApi",
-                 url: "TmdbApi/{id}/",
-                 defaults: new { controller = "TmdbApi", action = "GetPerson", id = "" },
-                 constraints: new { id = @"^[0-9]+$" }
-             );
-
-            routes.MapRoute(
-                name: "TmdbApiPaging",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                name: "Paging",
+                url: "{controller}/{action}/{page}",
+                defaults: new { controller = "Home", action = "Index", page = "" },
                 constraints: new { page = @"^[0-9]+$" }
             );
 

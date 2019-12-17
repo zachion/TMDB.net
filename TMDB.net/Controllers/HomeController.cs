@@ -16,9 +16,9 @@ namespace TMDB.net.Controllers
     public class HomeController : Controller
     {
         // GET: Popular
-        public ActionResult Index(int? id)
+        public ActionResult Index(int? page)
         {
-            int pageNo = Convert.ToInt32(id) == 0 ? 1 : Convert.ToInt32(id);
+            int pageNo = Convert.ToInt32(page) == 0 ? 1 : Convert.ToInt32(page);
 
             var popularMoviesResponse = GetPupular(Convert.ToInt32(pageNo));
 
