@@ -7,8 +7,11 @@ The **Home** page lists all pupular movies whilst the **Details** page contains 
 
 I am  using Visual Studio 2017. 
 All information is provided from the TMDB: https://www.themoviedb.org/
+
 To get the source code and run this project please clone: https://github.com/zachion/TMDB.net
+
 For demo please visit: http://tmdb.somee.com/
+
 ![](TMDB-net-demo.gif)
 
 Developed by @Zach Ioannou - 2019
