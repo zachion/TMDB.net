@@ -4,19 +4,10 @@
     ViewBag.Title = "Implementing TheMovieDB (TMDB) API";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    .center-block {
-        display: table;
-        width: 350px;
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-</style>
 <div id="apiDiv">
     <br />
-    
-        @using (Html.BeginForm())
-        {
+    @using (Html.BeginForm())
+    {
 
     <div class="col-lg-12">
         <div class="center-block">
@@ -26,11 +17,9 @@
                     <button class="btn btn-default" id="submit" type="submit">Search</button>
                 </span>
             </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
+        </div><!-- /.col-lg-12 -->
     </div>
-        }
-    
-    
+    }
     <div id="apiDiv">
         <div class="container">
             @if (Model.results != null)
@@ -69,7 +58,6 @@
                     </div><!--movie-card-->
                 }
             }
-
         </div><!--container-->
         <div id="message">
             @(new HtmlString(ViewBag.Result))
@@ -84,5 +72,4 @@
             }
         </div>
     </div>
-
 </div>
