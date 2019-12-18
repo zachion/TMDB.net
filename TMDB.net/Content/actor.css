@@ -1,0 +1,14 @@
+﻿.movie-ticket .ui-item .ui-review {
+    border: 1px solid #ddd !important;
+    padding: 15px 20px 40px;
+    border: 1px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+#floated {
+    padding-right: 15px;
+    float: left;
+    width: 150px;
+}
