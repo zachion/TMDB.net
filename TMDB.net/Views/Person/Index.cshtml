@@ -4,69 +4,85 @@
     ViewBag.Title = "Implementing TheMovieDB (TMDB) API";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .center-block {
+        display: table;
+        width: 350px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+</style>
 <div id="apiDiv">
-    <div class=" text-center">
-        <br />
-        <h4>Search actors by using the search below</h4>
+    <br />
+    
         @using (Html.BeginForm())
         {
-            @Html.EditorFor(model => model.searchText)
-            <button id="submit">Submit</button>
-            @Html.ValidationMessageFor(model => model.searchText)
+
+    <div class="col-lg-12">
+        <div class="center-block">
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.searchText, new { @class = "form-control", @placeholder = "Search actors by using this search box" })
+                <span class="input-group-btn">
+                    <button class="btn btn-default" id="submit" type="submit">Search</button>
+                </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+    </div>
         }
-    </div>
-        <div id="apiDiv">
-            <div class="container">
-                @if (Model.results != null)
+    
+    
+    <div id="apiDiv">
+        <div class="container">
+            @if (Model.results != null)
+            {
+                foreach (var actor in Model.results)
                 {
-                    foreach (var actor in Model.results)
-                    {
-                        string image = actor.profile_path == null ?
-                        Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + actor.profile_path;
-                        string link = Url.Action("GetPerson", "Person", new { id = actor.id });
-                        <div class="movie-card">
-                            <a href="@link">
-                                <div class="movie-header" style="background: url(@image);background-size: cover;">    </div><!--movie-header-->
-                            </a>
-                            <div class="movie-content">
-                                <div class="movie-content-header">
-                                    <a href="@link">
-                                        <h3 class="movie-title">@actor.name</h3>
-                                    </a>
-                                    <div class="imax-logo"></div>
-                                </div>
-                                <div class="movie-info">
-                                    <div class="info-section">
-                                        <label>Popularity</label>
-                                        <span>@actor.popularity</span>
-                                    </div><!--screen-->
-                                    <div class="info-section">
-                                        <label>Known for</label>
-                                        <span>@actor.known_for[0].title</span>
-                                    </div><!--row-->
-                                    <div class="info-section">
-                                        <label>Votes</label>
-                                        <span>@actor.known_for[0].vote_count</span>
-                                    </div><!--seat-->
-                                </div>
-                            </div><!--movie-content-->
-                        </div><!--movie-card-->
-                    }
+                    string image = actor.profile_path == null ?
+                    Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + actor.profile_path;
+                    string link = Url.Action("GetPerson", "Person", new { id = actor.id });
+                    <div class="movie-card">
+                        <a href="@link">
+                            <div class="movie-header" style="background: url(@image);background-size: cover;">    </div><!--movie-header-->
+                        </a>
+                        <div class="movie-content">
+                            <div class="movie-content-header">
+                                <a href="@link">
+                                    <h3 class="movie-title">@actor.name</h3>
+                                </a>
+                                <div class="imax-logo"></div>
+                            </div>
+                            <div class="movie-info">
+                                <div class="info-section">
+                                    <label>Popularity</label>
+                                    <span>@actor.popularity</span>
+                                </div><!--screen-->
+                                <div class="info-section">
+                                    <label>Known for</label>
+                                    <span>@actor.known_for[0].title</span>
+                                </div><!--row-->
+                                <div class="info-section">
+                                    <label>Votes</label>
+                                    <span>@actor.known_for[0].vote_count</span>
+                                </div><!--seat-->
+                            </div>
+                        </div><!--movie-content-->
+                    </div><!--movie-card-->
                 }
+            }
 
-            </div><!--container-->
-            <div id="message">
-                @(new HtmlString(ViewBag.Result))
-            </div>
-            <div class="pagingDiv">
-                @{
-                    PagingInfo pagingInfo = (PagingInfo)ViewBag.Paging;
-                    if (pagingInfo != null)
-                    {
-                        @Html.PageLinks((PagingInfo)ViewBag.Paging, x => Url.Action("Index", "Home", new { page = x }))
-                    }
-                }
-            </div>
+        </div><!--container-->
+        <div id="message">
+            @(new HtmlString(ViewBag.Result))
         </div>
-
+        <div class="pagingDiv">
+            @{
+                PagingInfo pagingInfo = (PagingInfo)ViewBag.Paging;
+                if (pagingInfo != null)
+                {
+                    @Html.PageLinks((PagingInfo)ViewBag.Paging, x => Url.Action("Index", "Home", new { page = x }))
+                }
+            }
+        </div>
     </div>
+
+</div>
