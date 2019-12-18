@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -48,7 +49,7 @@ namespace TMDB.net.Controllers
             int pageNo = Convert.ToInt32(page) == 0 ? 1 : Convert.ToInt32(page);
 
             /*Calling API https://developers.themoviedb.org/3/search/search-people */
-            string apiKey = "28f726d76e551a93fd511f2360befa56";
+            string apiKey = ConfigurationManager.AppSettings["ApiKey"];
             HttpWebRequest apiRequest = WebRequest.Create("https://api.themoviedb.org/3/search/person?api_key=" + apiKey + "&language=en-US&query=" + searchText + "&page=" + pageNo + "&include_adult=false") as HttpWebRequest;
 
             string apiResponse = "";
@@ -82,7 +83,7 @@ namespace TMDB.net.Controllers
         public ActionResult GetPerson(int id)
         {
             /*Calling API https://developers.themoviedb.org/3/people */
-            string apiKey = "28f726d76e551a93fd511f2360befa56";
+            string apiKey = ConfigurationManager.AppSettings["ApiKey"];
             HttpWebRequest apiRequest = WebRequest.Create("https://api.themoviedb.org/3/person/" + id + "?api_key=" + apiKey + "&language=en-US") as HttpWebRequest;
 
             string apiResponse = "";

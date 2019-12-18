@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -48,7 +49,8 @@ namespace TMDB.net.Controllers
         public PopularMoviesResponse GetPupular(int page)
         {
             /*Calling API https://developers.themoviedb.org/3/movie/popular */
-            string apiKey = "28f726d76e551a93fd511f2360befa56";
+            string apiKey = ConfigurationManager.AppSettings["ApiKey"];
+
             HttpWebRequest apiRequest = WebRequest.Create("https://api.themoviedb.org/3/movie/popular?api_key=" + apiKey +
                 "&language=en-US&page=" + page + "&include_adult=false") as HttpWebRequest;
 
