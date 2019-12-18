@@ -122,7 +122,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Class\PagingHelper.cs" />
     <Compile Include="Class\PagingInfo.cs" />
-    <Compile Include="Models\SearchPerson.cs" />
+    <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Models\SearchActorsResponse.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MovieDetailsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -179,9 +180,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\GetPerson.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\MovieDetails\Index.cshtml" />
+    <Content Include="Views\Person\GetPerson.cshtml" />
+    <Content Include="Views\Person\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

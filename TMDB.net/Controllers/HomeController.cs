@@ -47,8 +47,6 @@ namespace TMDB.net.Controllers
         //telling it to get me the x page for the search result.
         public PopularMoviesResponse GetPupular(int page)
         {
-
-
             /*Calling API https://developers.themoviedb.org/3/movie/popular */
             string apiKey = "28f726d76e551a93fd511f2360befa56";
             HttpWebRequest apiRequest = WebRequest.Create("https://api.themoviedb.org/3/movie/popular?api_key=" + apiKey +

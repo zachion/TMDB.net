@@ -1,0 +1,45 @@
+﻿@model TMDB.net.Models.TheMovieDb
+@{
+    ViewBag.Title = "Implementing TheMovieDB (TMDB) API";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div id="apiDiv">
+    <div class="movie-ticket">
+        <div class="container-fluid">
+            <!-- Item -->
+            <div class="ui-item">
+                <!-- Head -->
+                <h3>@Model.name</h3>
+                <div class="ui-head">
+                    <div class="post-container">
+                        @if (Model != null)
+                        {
+                            string image = Model.profilePath == null ?
+                            Url.Content("~/Content/Image/no-image.png") : Model.profilePath;
+                            <div class="ui-trans clearfix ">
+                                <!-- Image -->
+                                <img src="@image" alt="" class="img-responsive">
+                            </div>
+                        }
+
+                    </div>
+                </div>
+                <!-- Review -->
+                <div class="ui-review">
+                    <!-- Paragraph -->
+                    <p>@Model.imdbId</p>
+                    <!-- company-->
+                    <div class=" text-center" style="float:right;margin:10px;">
+                        <p>@Model.biography</p>
+                    </div>
+                    <!-- Buttons -->
+                    <br /><br />
+                    <div class=" text-center">
+                        <button type="button" class="btn btn-light" onclick="window.history.back();">Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
