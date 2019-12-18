@@ -1,17 +1,29 @@
 # TMDB.net
-I have developed a **TMDB wrapper**  using Asp.NET MVC 5 
-This is a asp.net (web application) project with a two main views (2 responsive pages) for viewing popular movies and
-movie specific details information. 
 
-The **Home** page lists all pupular movies whilst the **Details** page contains the movie specific information for each movie. For navigating to the movie specific page the user clicks on each movie title or image from the **Home** page. The **Details** page contains a **Back** button at the bottom line, which takes the user back to the **Home** page. I have also implemented a **Pager** at the bottom of the **Home** page. 
+A simple UI for a TMDB wrapper, written in .NET MVC 5 with Visual Studio 2017.
 
-I am  using Visual Studio 2017. 
-All information is provided from the TMDB: https://www.themoviedb.org/
+## Requirements
 
-To get the source code and run this project please clone: https://github.com/zachion/TMDB.net
+- Visual Studio 2017/2019
+- .NET Framework 4.6.1
+- MVC5
 
-For demo please visit: http://tmdb.somee.com/
+## Cool features
 
+The wrapper contains the following features
+
+- viewing all popular movies
+- navigating to each movie page via clicking on the individual movie cards
+- paging for navigation at the bottom of each view
+- search functionality for searching actor names
+
+## Contributing
+
+There is still a lot of work to go!
+https://www.themoviedb.org/
+
+## screenshot
 ![](TMDB-net-demo.gif)
 
-Developed by @Zach Ioannou - 2019
+## demo
+http://tmdb.somee.com/
